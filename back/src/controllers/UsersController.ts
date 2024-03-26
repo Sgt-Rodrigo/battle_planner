@@ -9,12 +9,18 @@ import IUser from "../interfaces/IUser";
 const userService = new UsersServices();
 
 export const createUser = async (req: Request, res: Response) => {
-  const { usrName, email, active } = req.body;
+
+  //*destructures the user data
+  const { usrName, email, birthDate, nationalId, password } = req.body;
+
+  //* creates the new user
   const newUser: IUser = await userService.createUser({
     usrName,
     email,
-    active,
-  });
+    birthDate,
+    nationalId,
+    credentialsId: 0, // You may need to generate or fetch credentialsId
+  }, password);
   res.status(201).json(newUser);
 };
 
@@ -28,13 +34,12 @@ export const getUsers = async (req: Request, res: Response) => {
 };
 
 export const getUserByID = async (req: Request, res: Response) => {
-  res.json(`returns one specific user via its id`);
+  const {id}= req.body;
+  const user = await userService.getUserById(id);
+  res.status(200).json(user);
 };
 
-export const deleteUser = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const deleteUser = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.body;
   await userService.deleteUser(id);
   res.status(200).json(`User Deleted Successfully`);

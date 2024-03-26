@@ -1,6 +1,8 @@
 export default interface UserDTO {
-    usrName: string,
+    usrName: string, 
     email: string,
-    active: boolean
+    birthDate: Date,
+    nationalId: number, 
+    credentialsId: number
 }
 

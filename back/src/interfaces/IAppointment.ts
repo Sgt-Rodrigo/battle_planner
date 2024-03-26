@@ -1,5 +1,7 @@
 export default interface Appointment {
     id: number
     date: Date,
-    time: 'string'
+    time: string,
+    userId: number,
+    status: 'active' | 'cancelled'
 }
