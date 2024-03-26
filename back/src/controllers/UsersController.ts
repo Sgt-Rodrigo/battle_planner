@@ -19,7 +19,7 @@ export const createUser = async (req: Request, res: Response) => {
     email,
     birthDate,
     nationalId,
-    credentialsId: 0, // You may need to generate or fetch credentialsId
+    // credentialsId: 0, // You may need to generate or fetch credentialsId
   }, password);
   res.status(201).json(newUser);
 };

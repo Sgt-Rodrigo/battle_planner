@@ -43,7 +43,7 @@ export default class UsersServices {
             email: userData.email,
             birthDate: userData.birthDate,
             nationalId: userData.nationalId, 
-            credentialsId: userData.credentialsId
+            credentialsId: newCredentialId
         }
         users.push(newUser);
         
