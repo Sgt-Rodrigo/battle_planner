@@ -1,5 +1,5 @@
 import server from "./server";
-import { PORT, DATABASE_PASSWORD } from "./config/envs";
+import { PORT } from "./config/envs";
 import "reflect-metadata";
 import { AppDataSource } from "./config/data-source";
 

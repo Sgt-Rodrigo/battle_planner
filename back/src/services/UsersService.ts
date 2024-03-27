@@ -1,4 +1,6 @@
+import { AppDataSource, UserModel } from "../config/data-source";
 import UserDTO from "../dto/UserDTO";
+import { User } from "../entities/User";
 import IUser from "../interfaces/IUser";
 import CredentialsService from "./CredentialsService";
 
@@ -8,7 +10,7 @@ let users:IUser[]= [
         id: 1,
         usrName: 'Ricky',
         email: 'ricky@ricky.com',
-        birthDate: new Date(1980, 6, 13),
+        birthDate: '1980-6-13',
         nationalId: 456, 
         credentialsId: 15
     }
@@ -22,21 +24,26 @@ const credentialsService = new CredentialsService();
 export default class UsersServices {
 
     //*? return all users
-    async getUsers():Promise<IUser[]> {
+    async getUsers():Promise<User[]> {
+        const users = await UserModel.find();
         return users
     };
 
     //*?returns 1 user by id.
-    async getUserById(id: number): Promise<IUser | null> {
-        const user = users.find(user => user.id === id);
-        //* ternary to verify if user actually exists
-        return user ? user : null;
+    async getUserById(id: number): Promise<User | null> {
+        const user = await UserModel.findOneBy({id});
+
+        // const user = users.find(user => user.id === id);
+        // //* ternary to verify if user actually exists
+        // return user ? user : null;
+
+        return user
     }
 
     //*? async functions are typed with Promise<T> return
     async createUser(userData:UserDTO, password: string):Promise<IUser> {
         const newCredentialId = await credentialsService.createCredential(userData.usrName, password);
-
+       
         const newUser:IUser = {
             id,
             usrName: userData.usrName,
@@ -45,7 +52,12 @@ export default class UsersServices {
             nationalId: userData.nationalId, 
             credentialsId: newCredentialId
         }
-        users.push(newUser);
+
+        //*? for users table creates and save a newUser
+        const users = await UserModel.create(newUser);
+        const result = await UserModel.save(newUser);
+
+       
         
         id++;
         return newUser
@@ -54,6 +66,5 @@ export default class UsersServices {
 
     async deleteUser(id:number):Promise<void> {
         users = users.filter((user:IUser) => user.id !== id)
-
     };
 }

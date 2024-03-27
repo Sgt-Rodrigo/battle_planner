@@ -4,9 +4,13 @@
 import { Request, Response } from "express";
 import UsersServices from "../services/UsersService";
 import IUser from "../interfaces/IUser";
+import { User } from "../entities/User";
+
 
 //*? instantiate UsersService to use the instance methods (services)
 const userService = new UsersServices();
+
+//*? CONTROLLERS > 
 
 export const createUser = async (req: Request, res: Response) => {
 
@@ -34,8 +38,8 @@ export const getUsers = async (req: Request, res: Response) => {
 };
 
 export const getUserByID = async (req: Request, res: Response) => {
-  const {id}= req.body;
-  const user = await userService.getUserById(id);
+  const {id}= req.params;
+  const user:IUser | null = await userService.getUserById(Number(id));
   res.status(200).json(user);
 };
 

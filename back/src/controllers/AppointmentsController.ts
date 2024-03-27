@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import AppointmentsService from "../services/AppointmentsService";
-import Appointment from "../dto/AppointmentDTO";
 import IAppointment from "../interfaces/IAppointment";
 
 const appointmentsService = new AppointmentsService();
@@ -19,17 +18,16 @@ export const getAppointmentByID = async (req:Request ,res:Response)=> {
 export const createNewAppointment = async (req:Request ,res:Response)=> {
     const { date, time, userId } = req.body;
 
-    if (!userId) {
-      return res.status(400).json({ message: 'User ID is required' });
-    }
+    // if (!userId) {
+    //   return res.status(400).json({ message: 'User ID is required' });
+    // }
   
     const newAppointment: IAppointment= await appointmentsService.createAppointment({
-      id: 0,
       date,
       time,
       userId,
       status: 'active',
-    }, userId);
+    });
   
     res.status(201).json(newAppointment);
 }
