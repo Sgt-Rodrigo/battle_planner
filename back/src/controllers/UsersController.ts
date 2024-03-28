@@ -17,13 +17,12 @@ export const createUser = async (req: Request, res: Response) => {
   //*destructures the user data
   const { usrName, email, birthDate, nationalId, password } = req.body;
 
-  //* creates the new user
-  const newUser: IUser = await userService.createUser({
+  //* creates the new user via createUser service
+  const newUser: User = await userService.createUser({
     usrName,
     email,
     birthDate,
     nationalId,
-    // credentialsId: 0, // You may need to generate or fetch credentialsId
   }, password);
   res.status(201).json(newUser);
 };
@@ -33,13 +32,13 @@ export const loginUser = async (req: Request, res: Response) => {
 };
 
 export const getUsers = async (req: Request, res: Response) => {
-  const users: IUser[] = await userService.getUsers();
+  const users: User[] = await userService.getUsers();
   res.status(200).json(users);
 };
 
 export const getUserByID = async (req: Request, res: Response) => {
   const {id}= req.params;
-  const user:IUser | null = await userService.getUserById(Number(id));
+  const user:User | null = await userService.getUserById(Number(id));
   res.status(200).json(user);
 };
 

@@ -1,7 +1,11 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm"
 import { Appointment } from "./Appointment"
+import { Credential } from "./Credential"
+
+//*? this class creates the table and interacts with postgre. (create, find, etc)
 
 @Entity({
+    //*? sets the name of the postgre table. You DON'T USE IT HERE.
     name: 'users'
 })
 export class User {
@@ -22,10 +26,17 @@ export class User {
     @Column('integer')
     nationalId: number 
 
-    @Column('integer')
-    credentialsId: number
+    // @Column('integer')
+    // credentialsId: number
 
-    @OneToOne(()=> Appointment)
+    //*? One to One
+    @OneToOne(() => Credential)
     @JoinColumn()
-    appointment: Appointment
+    credential: Credential;
+
+    //*? One to Many
+    @OneToMany(()=> Appointment, (appointment) => appointment.user)
+    appointments: Appointment[]
+
+
 }

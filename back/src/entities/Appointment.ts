@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
+import { User } from "./User"
 
 
 @Entity({
@@ -20,6 +21,10 @@ export class Appointment {
     @Column()
     status: 'active' | 'cancelled'
 
+
+    //*? Many to One
+    @ManyToOne(()=> User, (user)=> user.appointments)
+    user: User
     
 }
 
