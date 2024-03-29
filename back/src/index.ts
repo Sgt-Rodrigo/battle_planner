@@ -2,7 +2,7 @@ import server from "./server";
 import { PORT } from "./config/envs";
 import "reflect-metadata";
 import { AppDataSource } from "./config/data-source";
-import { preLoadData } from "./helpers/preloadData";
+import { UsersPreLoadData, AppointmentsPreLoadData } from "./helpers/preloadData";
 
 
 
@@ -19,7 +19,8 @@ import { preLoadData } from "./helpers/preloadData";
 //*? initialization with async/await
 const initializeApp = async ()=>{
     await AppDataSource.initialize();
-    await preLoadData();
+    await UsersPreLoadData();
+    await AppointmentsPreLoadData();
     server.listen(PORT, ()=>{
         console.log(`SERVER IS UP and RUNNING > port# ${PORT}`)
     })

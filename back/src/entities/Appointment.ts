@@ -19,7 +19,7 @@ export class Appointment {
     userId: number
 
     @Column()
-    status: 'active' | 'cancelled'
+    status:  'active' | 'cancelled'
 
 
     //*? Many to One
