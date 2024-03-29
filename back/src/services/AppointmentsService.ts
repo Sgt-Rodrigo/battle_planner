@@ -1,8 +1,10 @@
 import { error } from "console";
-import { AppointmentModel, UserModel } from "../config/data-source";
+import { AppDataSource} from "../config/data-source";
 import Appointment from "../dto/AppointmentDTO";
 import IAppointment from "../interfaces/IAppointment";
 import AppointmentDTO from "../dto/AppointmentDTO";
+import AppointmentRepository from "../repositories/AppointmentRepository";
+import UserRepository from "../repositories/UserRepository";
 
 // let id = 13;
 
@@ -33,7 +35,7 @@ import AppointmentDTO from "../dto/AppointmentDTO";
 export default class AppointmentsService {
 
     async getAllAppointments(){
-        const appointments = await AppointmentModel.find({
+        const appointments = await AppointmentRepository.find({
             relations: {
                 user: true
             }
@@ -47,32 +49,32 @@ export default class AppointmentsService {
         // return appointment ? appointment : null
     }
 
-    async createAppointment(appointmentData: AppointmentDTO) {       
+    async createAppointment(appointmentData: AppointmentDTO){  
+        //* Service using queryRunner
 
-         //*? finds the user. Only if it exist we will create and save the appointment.
-        //*? user is one register, one entity instance of type User (entity) so it has an appointment property > the foreign key column >
-        const user = await UserModel.findOneBy({id:appointmentData.userId})
+        const queryRunner = AppDataSource.createQueryRunner();
+        await queryRunner.connect();
 
-        //*?  the checker suggest to use '?' cause this could be null if userId is not found. We handle this with  an if statemente for now.
-        if(user){      
-             //*? bear in mind, that for now I'm passing the userID manually through postman
-             //*? creates the appointment and saves it in its table
-        const newAppointment = await AppointmentModel.create(appointmentData);
-        await AppointmentModel.save(newAppointment);
-
-        newAppointment.user = user;
-        await AppointmentModel.save(newAppointment);
-
-           //*! updates the user entity instance 'appoitment' property (the join column) BUT does not save it in database!!!!
-            // user.appointment = newAppointment;     
-
-          //*! saves any updates on user entity instance in database (persistance)
-            // await UserModel.save(user);
-
-            return newAppointment;  
-        } else {
-            throw Error(`user was not found`)
-        }          
+       try {
+         queryRunner.startTransaction();
+ 
+         const newAppointment = await AppointmentRepository.create(appointmentData);
+         await queryRunner.manager.save(newAppointment);
+ 
+         const user = await UserRepository.findById(appointmentData.userId);
+ 
+         newAppointment.user = user;
+         await queryRunner.manager.save(newAppointment);
+ 
+         await queryRunner.commitTransaction();
+ 
+         return newAppointment
+       } catch (error) {
+           await queryRunner.rollbackTransaction();
+           throw Error(`User Not Found.Appointment was not created`);
+       }finally {
+        await queryRunner.release();
+       }        
      }
 
     async cancelAppointment(appointmentId: number): Promise<void> {

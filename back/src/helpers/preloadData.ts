@@ -1,6 +1,8 @@
 import { query } from "express";
-import { AppDataSource, AppointmentModel, UserModel } from "../config/data-source";
+import { AppDataSource} from "../config/data-source";
 import { User } from "../entities/User";
+import UserRepository from "../repositories/UserRepository";
+import AppointmentRepository from "../repositories/AppointmentRepository";
 
 
 const usersPreload = [
@@ -46,7 +48,7 @@ const appointmentsPreload = [
     {
         date: "2024-5-23",
         time: "10:00",
-        userId: 6,
+        userId: 5,
         status: 'active' as 'active'
     },
     {
@@ -80,12 +82,12 @@ export const UsersPreLoadData = async ()=>{
 
      await   AppDataSource.manager.transaction(async(transactionalEntityManager)=>{
 
-            const users = await UserModel.find(); //*?returns an array
+            const users = await UserRepository.find(); //*?returns an array
             //*? if array is not empty > 
             if(users.length) return console.log(`Preload aborted: previous UsersPreload  still exist in database`)
 
             for await (const user of usersPreload){
-                const newUser = await UserModel.create(user);
+                const newUser = await UserRepository.create(user);
                 await transactionalEntityManager.save(newUser);
             }        
         
@@ -99,15 +101,15 @@ export const UsersPreLoadData = async ()=>{
 
 //    await AppDataSource.manager.transaction(async(transactionalEntityManager)=>{
 
-//         const appointments = await AppointmentModel.find();
+//         const appointments = await AppointmentRepository.find();
 
 //         if(appointments.length) return console.log('Preload aborted: previous AppointmentsPreload still exist in database')
 
 //         for await (const appointment of appointmentsPreload){
-//             const newAppointment = await AppointmentModel.create(appointment);
+//             const newAppointment = await AppointmentRepository.create(appointment);
 //             await transactionalEntityManager.save(newAppointment);
 
-//             const user = await UserModel.findOneBy({id:appointment.userId});
+//             const user = await UserRepository.findOneBy({id:appointment.userId});
 
 //             if(user){
 //                 newAppointment.user = user;
@@ -130,9 +132,9 @@ export const AppointmentsPreLoadData = async ()=> {
 
     //*? turns array of apointments into array of promises. Promises that run the operation needed.
     const promises = appointmentsPreload.map(async(appointment)=>{
-        const newAppointment = await AppointmentModel.create(appointment);
+        const newAppointment = await AppointmentRepository.create(appointment);
         await queryRunner.manager.save(newAppointment);
-        const user = await UserModel.findOneBy({id: appointment.userId});
+        const user = await UserRepository.findOneBy({id: appointment.userId});
         if(!user) throw Error ('User Not Found')
         newAppointment.user = user;
         queryRunner.manager.save(newAppointment);

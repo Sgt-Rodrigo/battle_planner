@@ -18,18 +18,20 @@ export const getAppointmentByID = async (req:Request ,res:Response)=> {
 export const createNewAppointment = async (req:Request ,res:Response)=> {
     const { date, time, userId } = req.body;
 
-    // if (!userId) {
-    //   return res.status(400).json({ message: 'User ID is required' });
-    // }
+   
   
-    const newAppointment: IAppointment= await appointmentsService.createAppointment({
-      date,
-      time,
-      userId,
-      status: 'active',
-    });
-  
-    res.status(201).json(newAppointment);
+    try {
+        const newAppointment: IAppointment= await appointmentsService.createAppointment({
+          date,
+          time,
+          userId,
+          status: 'active',
+        });
+      
+        res.status(201).json(newAppointment);
+    } catch (error) {
+        res.status(400).json({error:`User Not Found.Appointment was not created`})
+    }
 }
 
 export const cancelAppointment = async (req:Request ,res:Response)=> {
