@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm"
+import { BaseEntity, Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm"
 import { Appointment } from "./Appointment"
 import { Credential } from "./Credential"
 
@@ -8,12 +8,13 @@ import { Credential } from "./Credential"
     //*? sets the name of the postgre table. You DON'T USE IT HERE.
     name: 'users'
 })
-export class User {
+export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number
 
     @Column({
-        length: 100
+        length: 100,
+        unique: true
     })
     usrName: string
 

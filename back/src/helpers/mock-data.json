@@ -1,0 +1,38 @@
+[
+  {
+    "usrName": "Emma",
+    "email": "emma@mail.com",
+    "birthDate": "1975-07-13",
+    "nationalId": 1111,
+    "password": "secretQueent"
+  },
+  {
+    "usrName": "Ricky",
+    "email": "ricky@mail.com",
+    "birthDate": "1975-07-13",
+    "nationalId": 22222,
+    "password": "secretKing"
+  },
+
+  {
+    "usrName": "George",
+    "email": "george@mail.com",
+    "birthDate": "1975-07-13",
+    "nationalId": 333333,
+    "password": "georgeisn'tathomenow"
+  },
+  {
+    "usrName": "Cosmo",
+    "email": "cosmo@mail.com",
+    "birthDate": "1975-07-13",
+    "nationalId": 4444444,
+    "password": "theass-man"
+  },
+  {
+    "usrName": "Elaine",
+    "email": "elaine@mail.com",
+    "birthDate": "1975-07-13",
+    "nationalId": 555555,
+    "password": "sweetlaugh"
+  }
+]

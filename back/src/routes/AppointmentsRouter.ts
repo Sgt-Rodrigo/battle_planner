@@ -4,11 +4,11 @@ import auth from "../middlewares/auth";
 
 const appointmentsRouter:Router = Router();
 
-appointmentsRouter.get('/', auth, getAppointments);
+appointmentsRouter.get('/',getAppointments);
 
 appointmentsRouter.post('/schedule', createNewAppointment);
 
-appointmentsRouter.put('/cancel', cancelAppointment);
+appointmentsRouter.put('/cancel/:id', cancelAppointment);
 
 appointmentsRouter.get('/:id', getAppointmentByID);
 

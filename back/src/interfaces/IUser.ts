@@ -4,5 +4,5 @@ export default interface IUser {
     email: string,
     birthDate: string,
     nationalId: number, 
-    credentialsId: number
+
 }

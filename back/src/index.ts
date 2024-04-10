@@ -19,8 +19,8 @@ import { UsersPreLoadData, AppointmentsPreLoadData } from "./helpers/preloadData
 //*? initialization with async/await
 const initializeApp = async ()=>{
     await AppDataSource.initialize();
-    await UsersPreLoadData();
-    await AppointmentsPreLoadData();
+    // await UsersPreLoadData();
+    // await AppointmentsPreLoadData();
     server.listen(PORT, ()=>{
         console.log(`SERVER IS UP and RUNNING > port# ${PORT}`)
     })

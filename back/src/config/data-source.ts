@@ -12,7 +12,7 @@ export const AppDataSource = new DataSource({
     username: "postgres",
     password: DATABASE_PASSWORD,
     database: "demo_typeorm",
-    dropSchema: true,
+    // dropSchema: true,
     synchronize: true,
     logging: false,
     entities: [User, Appointment, Credential],
@@ -21,7 +21,7 @@ export const AppDataSource = new DataSource({
 })
 
 
-//*? this is later done in a separate dir
+//*? this is later done in a separate dir as Repositories
 
 export const UserModel = AppDataSource.getRepository(User);
 export const AppointmentModel = AppDataSource.getRepository(Appointment);

@@ -29,14 +29,15 @@ import ICredential from "../interfaces/ICredential";
 //*? implements a class to encapsulate the mehtods
 export default class CredentialsService {
 
-    async createCredential(username:string, password:string) {
+    async createCredential(username:string, password:string):Promise<Credential> {
             
-        const newCredential: Credential = await CredentialModel.create({
+        const newCredential: Credential = Credential.create({
             username:username,
             password:password
         })
 
-        await CredentialModel.save(newCredential);
+        //*? here you can also use newCredential.save()
+        await Credential.save(newCredential);
 
       console.log(newCredential)
         return newCredential;
