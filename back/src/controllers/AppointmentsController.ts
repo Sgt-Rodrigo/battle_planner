@@ -36,7 +36,7 @@ export const getAppointmentByID = async (req: Request, res: Response) => {
 };
 
 export const createNewAppointment = async (req: Request, res: Response) => {
-  const { date, time, userId } = req.body;
+  const { date, time, location, gameMode, userId } = req.body;
 
   try {
     //*! Remeber: typeorm understands the any 'GeneratedColumn' value will be automatically created by the database later, that's why using this interface as a type does NOT raise an error.
@@ -46,6 +46,8 @@ export const createNewAppointment = async (req: Request, res: Response) => {
       await appointmentsService.createAppointment({
         date,
         time,
+        location,
+        gameMode,
         userId,
         status: "active",
       });

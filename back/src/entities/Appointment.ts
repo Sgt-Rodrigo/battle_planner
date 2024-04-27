@@ -16,6 +16,12 @@ export class Appointment extends BaseEntity {
     time: string
 
     @Column()
+    location: string
+
+    @Column()
+    gameMode: string
+
+    @Column()
     userId: number
 
     @Column()
