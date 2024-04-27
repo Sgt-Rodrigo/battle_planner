@@ -2,33 +2,50 @@ import { useEffect, useState } from "react";
 import { mockAppointments } from "../../helpers/mock-appointments";
 import SingleDeployment from "../../components/SingleDeployment/SingleDeployment";
 import Table from 'react-bootstrap/Table';
+import axios from 'axios';
 
 function MyDeployments() {
     //w type useState to avoid 'never' type ts handling which raises errors
     const [deployments, setDeployments] = useState<mockAppointments[]>([]);
     const [loading, setLoading] = useState(true);
 
+    // useEffect(()=>{
+    //   async function fetchData(){
+
+    //     try {
+    //       const uri = 'http://localhost:8000/deployments';
+    //       const res = await fetch(uri);
+    //       const data = await res.json();
+    //       setDeployments(data);
+    //       setLoading(false);
+    //     } catch (error) {
+    //       if(error instanceof Error) {
+    //         console.log(error.message)
+    //       }else {
+    //         console.error("An error occurred:", error);
+    //       }
+    //     }
+    //   }
+    //   //w calls it!!!
+    //   fetchData();    
+
+    // },[])
+
     useEffect(()=>{
       async function fetchData(){
 
         try {
-          const uri = 'http://localhost:8000/deployments';
-          const res = await fetch(uri);
-          const data = await res.json();
-          setDeployments(data);
+          const uri = `http://localhost:3001/appointments/`
+          const res = await axios.get(uri);
+          setDeployments(res.data);
           setLoading(false);
         } catch (error) {
-          if(error instanceof Error) {
+          if(error instanceof Error){
             console.log(error.message)
-          }else {
-            console.error("An error occurred:", error);
           }
         }
       }
-
       fetchData();
-     
-
     },[])
 
   return (
