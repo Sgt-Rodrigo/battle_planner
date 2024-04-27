@@ -1,11 +1,20 @@
 import './App.scss'; //w global styles
+import MainNavbar from './components/MainNavbar/MainNavbar';
 import Home from './views/Home/Home'; 
+import MyDeployments from './views/MyDeployments/MyDeployments';
+
 
 function App() {
 
   return (
-    <>     
-      <Home/>
+    <>
+        <MainNavbar/>
+        
+      <div className="container">
+        <Home/>
+        <MyDeployments/>
+      </div>
+
     </>
   )
 }

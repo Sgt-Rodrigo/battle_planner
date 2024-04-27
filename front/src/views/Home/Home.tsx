@@ -1,10 +1,9 @@
-import MainNavbar from '../../components/MainNavbar/MainNavbar';
 import home from './Home.module.scss';
 
 function Home() {
   return (
     <>
-        <MainNavbar/>
+       <h1 className='border border-warning'>Home Component</h1>
     </>
   )
 }
