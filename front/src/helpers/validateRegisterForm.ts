@@ -1,5 +1,5 @@
 import { FormikErrors } from 'formik';
-import { FormValues } from '../views/Register/Register';
+import FormValues from '../typings/interfaces/FormValues';
 
 export const validateRegisterForm = (values: FormValues) => {
   const errors: FormikErrors<FormValues> = {};

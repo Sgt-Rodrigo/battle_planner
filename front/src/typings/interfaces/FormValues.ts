@@ -5,3 +5,5 @@ export default interface FormValues {
     nationalId: string,
     password: string;
   }
+
+export type LoginValues = Pick<FormValues, "usrName" | "password">
