@@ -2,6 +2,7 @@ import { Formik, Form, Field, ErrorMessage} from 'formik';
 import { validateRegisterForm } from '../../helpers/validateRegisterForm';
 import axios from 'axios';
 import FormValues from '../../typings/interfaces/FormValues';
+import { Link } from 'react-router-dom';
 
 function Register() {
 
@@ -54,6 +55,8 @@ function Register() {
             <label htmlFor="password">Password</label>
             <Field type="password" name="password" />
             <ErrorMessage name="password" component="div" />
+
+            <h3>Confirm password field goes here mate!!!!</h3>
 
             <button type="submit" disabled={isSubmitting}>
               Submit
