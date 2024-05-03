@@ -39,7 +39,7 @@ export const loginUser = async (req: Request, res: Response) => {
   const {usrName, password} = req.body;
   try {
     const loggedInUser:ILoginResponse = await userService.loginUser(usrName, password);
-    res.status(200).json(`${usrName} is logged in`);
+    res.status(200).json(loggedInUser);
   } catch (error) {
     if(error instanceof Error){
       res.status(400).json({message:error.message})

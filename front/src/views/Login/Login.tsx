@@ -2,10 +2,23 @@ import { Formik, Form, Field, ErrorMessage} from 'formik';
 import axios from 'axios';
 import { validateLoginForm } from '../../helpers/validateLoginForm';
 import { LoginValues } from '../../typings/interfaces/FormValues';
+import {  useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../redux/state/store';
+import { loginUserSuccess } from '../../redux/slices/userSlice';
+import { useNavigate } from 'react-router-dom';
+
+
+
 
 
 
 function Login() {
+  //w I dont need this selector here cause I m not interpolating any data in this view.This is just for testing the output.
+  const userData = useSelector((state:RootState)=>state.user);
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
+
 
   async function loginUser(values:LoginValues,{setSubmitting}:{setSubmitting:(isSubmitting:boolean)=> void}){
     try {
@@ -15,8 +28,18 @@ function Login() {
         usrName:values.usrName,
         password: values.password
       })
-      console.log(res.data);
+
+      const userData = res.data
+      console.log(userData);
+
+      dispatch(loginUserSuccess(userData));
+      console.log(userData.user.name);
+      console.log(userData.user.email);
+      console.log(userData.user.appointments)
+
       alert('Login successful')
+      navigate('/user/deployments');
+     
     } catch (error) {
       if(error instanceof Error){
         console.log('Login Error:', error.message)

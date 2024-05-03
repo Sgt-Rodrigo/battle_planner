@@ -82,8 +82,12 @@ export default class UsersServices {
            try {
              const user = await UserRepository.findOne({
                  where: {usrName:usrName},
-                 relations:{credential:true}
+                 relations:{
+                  credential:true,
+                  appointments: true
+                }
              });
+             console.log(user)
      
              if(!user) throw new Error(`Incorrect Username`);
 
@@ -98,7 +102,8 @@ export default class UsersServices {
                   name: user.usrName,
                   email: user.email,
                   birthdate: user.birthDate,
-                  nDni: user.nationalId
+                  nDni: user.nationalId,
+                  appointments: user.appointments
                 }
               };
 

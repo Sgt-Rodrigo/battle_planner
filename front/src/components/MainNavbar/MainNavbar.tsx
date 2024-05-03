@@ -3,10 +3,14 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { RootState } from '../../redux/state/store';
 
 
 function MainNavbar() {
+
+  const userData = useSelector((state:RootState)=>state.user)
 
   return (
     <>
@@ -17,6 +21,8 @@ function MainNavbar() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link as={Link} to="/">Home</Nav.Link>
+              {/* if user is logged in, the following link is rendered */}
+              {userData.login && <Nav.Link as={Link} to="/user/deployments">My Deployments</Nav.Link>}
               <Nav.Link as={Link} to="/user/register">Register</Nav.Link>
               <Nav.Link as={Link} to="/user/login">Login</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
