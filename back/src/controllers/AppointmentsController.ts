@@ -69,8 +69,8 @@ export const cancelAppointment = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    await appointmentsService.cancelAppointment(parseInt(id));
-    res.json(`Appointment CANCELLED`);
+    const updatedAppointment = await appointmentsService.cancelAppointment(parseInt(id));
+    res.json(updatedAppointment);
   } catch (error) {
     reportError(error, 404, res)
 

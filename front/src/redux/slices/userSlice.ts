@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import axios from "axios";
 
 //w appointments interface
 interface SingleAppointment {
@@ -63,8 +64,47 @@ const userSlice = createSlice({
             state.login = true;
             state.user= action.payload;
           },
-    }
+        },
+        extraReducers: (builder) => {
+            builder
+            .addCase(cancelDeployment.pending, ()=>{
+                    console.log('cancelling deployment... please wait...')
+                })
+             .addCase(cancelDeployment.fulfilled,
+                    (state, action) => {
+                        //w finds the specific appointment to update
+                        const index = state.user.appointments.findIndex(appointment => appointment.id === action.payload.id);
+
+                        //w checks the deployment exists and replaces it
+                        if(index !== -1) {
+                            state.user.appointments[index] = action.payload
+                        }
+                        
+                    }
+                )
+                .addCase(cancelDeployment.rejected, ()=>{
+                    console.log('Cancelation Failed')
+                })
+        }
 })
 
-export const { loginUserSuccess } = userSlice.actions;
+export const cancelDeployment = createAsyncThunk(
+    'user/cancelDeployment',
+    async (id:number) => {
+        try {
+            const uri = 'http://localhost:3001/appointments/cancel/';
+    
+            const res = await axios.put(uri + id);
+            //w this data is taken by the action.payload
+            return res.data
+
+        } catch (error) {
+           if(error instanceof Error) {
+               console.log(error.message)
+           }
+        }
+    }
+)
+
+export const  { loginUserSuccess } = userSlice.actions;
 export default userSlice.reducer;

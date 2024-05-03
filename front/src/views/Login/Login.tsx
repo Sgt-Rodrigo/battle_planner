@@ -9,9 +9,6 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-
-
-
 function Login() {
   //w I dont need this selector here cause I m not interpolating any data in this view.This is just for testing the output.
   const userData = useSelector((state:RootState)=>state.user);

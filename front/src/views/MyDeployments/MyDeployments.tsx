@@ -4,7 +4,7 @@ import SingleDeployment from "../../components/SingleDeployment/SingleDeployment
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/state/store";
+import { AppDispatch, RootState } from "../../redux/state/store";
 import { userDeployment } from "../../typings/types/userDeployment";
 
 
@@ -15,10 +15,18 @@ function MyDeployments(){
   console.log('userDeployments', userDeployments);
   // const [loading, setLoading] = useState(false);
 
+ 
+
 
   return (
     <>
         <h1>My Deployments</h1>
+
+        {
+            !userDeployments.length ? 
+            <div>Everything quiet in the frontlines <br /> 
+                No deployments ahead. 
+            </div> : 
                 <Table striped bordered hover variant="dark">
                     <thead>
                         <tr>
@@ -27,21 +35,26 @@ function MyDeployments(){
                             <th>Location</th>
                             <th>Game Mode</th>
                             <th>Status</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {userDeployments.map((deployment:userDeployment) => (
                             <SingleDeployment
                                 key={deployment.id}
+                                id={deployment.id}
                                 date={deployment.date}
                                 time={deployment.time}
                                 location={deployment.location}
                                 gameMode={deployment.gameMode}
                                 status={deployment.status}
+                               
                             />
                         ))}
                     </tbody>
-                </Table>           
+                </Table>         
+
+        }
     
     </>
   )

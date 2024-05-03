@@ -1,7 +1,13 @@
-import { displayedData } from "../../helpers/mock-appointments"
+import { useDispatch } from "react-redux";
+import { SingleDeploymentProps } from "../../typings/types/SingleDeployment";
+import { AppDispatch } from "../../redux/state/store";
+import { cancelDeployment } from "../../redux/slices/userSlice";
 
 
-function SingleDeployment({date, time, location, gameMode, status}:displayedData) {
+
+function SingleDeployment({id,date, time, location, gameMode, status}:SingleDeploymentProps) {
+  const dispatch = useDispatch<AppDispatch>();
+
   return (
         <tr>
           <td>{date}</td>
@@ -9,6 +15,7 @@ function SingleDeployment({date, time, location, gameMode, status}:displayedData
           <td>{location}</td>
           <td>{gameMode}</td>
           <td>{status}</td>
+          <td><button type="button" onClick={()=>dispatch(cancelDeployment(id))}>Cancel</button></td>
         </tr>
   )
 }

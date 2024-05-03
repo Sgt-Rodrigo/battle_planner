@@ -97,6 +97,7 @@ export default class AppointmentsService {
             //*? this is valid, entity instances actually have save() method and  typeorm understands this is an instance of Appointment so it knows where to save it.
             //*? Of course, the best practice is to use the Repo.
             await appointment.save();
+            return appointment
 
         } catch (error) {
             console.log(error);
