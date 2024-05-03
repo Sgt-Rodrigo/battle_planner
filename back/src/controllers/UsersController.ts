@@ -39,6 +39,7 @@ export const loginUser = async (req: Request, res: Response) => {
   const {usrName, password} = req.body;
   try {
     const loggedInUser:ILoginResponse = await userService.loginUser(usrName, password);
+    console.log('from Controller',loggedInUser)
     res.status(200).json(loggedInUser);
   } catch (error) {
     if(error instanceof Error){

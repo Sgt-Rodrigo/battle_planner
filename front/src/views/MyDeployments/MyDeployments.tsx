@@ -10,7 +10,7 @@ import { userDeployment } from "../../typings/types/userDeployment";
 
 function MyDeployments(){
   const userData = useSelector((state:RootState)=>state.user);
-  const userDeployments = userData.user.user.appointments;
+  const userDeployments = userData.user.appointments;
   console.log('Hi Mate',userData);
   console.log('userDeployments', userDeployments);
   // const [loading, setLoading] = useState(false);

@@ -30,9 +30,9 @@ function Login() {
       })
 
       const userData = res.data
-      console.log(userData);
+      console.log('Data Received from controller',userData);
 
-      dispatch(loginUserSuccess(userData));
+      dispatch(loginUserSuccess(userData.user));
       console.log(userData.user.name);
       console.log(userData.user.email);
       console.log(userData.user.appointments)

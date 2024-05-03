@@ -13,9 +13,9 @@ interface SingleAppointment {
 
 
 //w type for the initialState
-interface InitialState {
+interface InitialState {    
     login:boolean,
-    user: {
+    user: {      
         id: number,
         name: string,
         email: string,
@@ -26,15 +26,15 @@ interface InitialState {
 }
 
 //? type for payload
-interface UserPayload {   
-        id: number,
-        name: string,
-        email: string,
-        birthDate: string,
-        nDni: number,
-        appointments: SingleAppointment[]
-    
-  }
+interface UserPayload {  
+            id: number,
+            name: string,
+            email: string,
+            birthDate: string,
+            nDni: number,
+            appointments: SingleAppointment[]
+        }
+
 
 
 
@@ -59,6 +59,7 @@ const userSlice = createSlice({
     initialState,
     reducers:{
         loginUserSuccess(state, action: PayloadAction<UserPayload>) {
+            console.log('ACTION',action.payload)
             state.login = true;
             state.user= action.payload;
           },
