@@ -10,6 +10,7 @@ import Login from './views/Login/Login';
 import { Provider } from 'react-redux';
 import { store } from './redux/state/store';
 import MyDeployments from './views/MyDeployments/MyDeployments';
+import RequestDeployment from './views/RequestDeployment/RequestDeployment';
 
 //w createBrowserRouter(newest implementation), here you set all your client side routes
 
@@ -34,6 +35,10 @@ const router= createBrowserRouter([
       {
         path:'/user/deployments',
         element:<MyDeployments/>
+      },
+      {
+        path: '/user/new_deployment',
+        element:<RequestDeployment/>
       }
       
     ]    

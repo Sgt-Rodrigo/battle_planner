@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
+import { NewDeploymentInput } from "../../typings/types/NewDeployment";
 
 //w appointments interface
 interface SingleAppointment {
@@ -85,9 +86,16 @@ const userSlice = createSlice({
                 .addCase(cancelDeployment.rejected, ()=>{
                     console.log('Cancelation Failed')
                 })
+                .addCase(scheduleDeployment.fulfilled,
+                    (state, action) => {
+                        // Add the new appointment to the user's appointments array
+                        state.user.appointments.push(action.payload);
+                    }
+                )
         }
 })
 
+//w cancel reducer
 export const cancelDeployment = createAsyncThunk(
     'user/cancelDeployment',
     async (id:number) => {
@@ -97,6 +105,36 @@ export const cancelDeployment = createAsyncThunk(
             const res = await axios.put(uri + id);
             //w this data is taken by the action.payload
             return res.data
+
+        } catch (error) {
+           if(error instanceof Error) {
+               console.log(error.message)
+           }
+        }
+    }
+)
+
+
+//w new Deployment reducer
+export const scheduleDeployment = createAsyncThunk(
+    'user/scheduleDeployment',
+    async (userInput:NewDeploymentInput, { getState }) => {
+        try {
+            const uri = 'http://localhost:3001/appointments/schedule';
+            const { user } = (getState() as { user: InitialState }).user;
+            
+            // Complete the user input with userId and status
+            const data = {
+                ...userInput,
+                userId: user.id              
+            };
+
+            console.log('DATA SENT FOR NEW DEPLOY',data);
+    
+            const res = await axios.post(uri, data);
+            console.log('NEW DEPLOYMENT', res)
+            //w this data is taken by the action.payload
+            return res.data;
 
         } catch (error) {
            if(error instanceof Error) {
