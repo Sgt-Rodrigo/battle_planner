@@ -4,6 +4,7 @@ export default interface FormValues {
     birthDate: string,
     nationalId: string,
     password: string;
+    confirm: string;
   }
 
 export type LoginValues = Pick<FormValues, "usrName" | "password">

@@ -27,7 +27,7 @@ function MyDeployments(){
             <div>Everything quiet in the frontlines <br /> 
                 No deployments ahead. 
             </div> : 
-                <Table striped bordered hover variant="dark">
+                <Table striped bordered hover variant="dark" responsive>
                     <thead>
                         <tr>
                             <th>#</th>

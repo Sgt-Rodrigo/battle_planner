@@ -1,7 +1,8 @@
+import './reset.scss'; //w reset styles
+import './main.scss'; //w global styles
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import './main.scss'; //w global styles
 import Home from './views/Home/Home';
 import ErrorPage from './views/Error/ErrorPage';
 import Register from './views/Register/Register';

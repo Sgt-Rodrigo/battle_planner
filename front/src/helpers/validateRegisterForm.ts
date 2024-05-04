@@ -59,6 +59,13 @@ export const validateRegisterForm = (values: FormValues) => {
       'Password must be 8 to 20 characters long and contain at least one symbol, one uppercase letter, and one alphanumeric character.';
   }
 
+  //w Confirm password validation
+  if (!values.confirm) {
+    errors.confirm = 'Confirm Password is required';
+  } else if (values.password !== values.confirm) {
+    errors.confirm = 'Passwords do not match';
+  }
+
   return errors;
 }
 

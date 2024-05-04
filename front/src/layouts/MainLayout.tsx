@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom"
 import MainFooter from "../components/MainFooter/MainFooter"
 import MainNavbar from "../components/MainNavbar/MainNavbar"
+import styles from "./MainLayout.module.scss";
 
 
 
@@ -8,13 +9,13 @@ import MainNavbar from "../components/MainNavbar/MainNavbar"
 function MainLayout() {
   return (
     <>
-        <MainNavbar/>
-
-        <div className="container">
-            <Outlet/>
+        <div className={styles.layout_container}>
+          <MainNavbar/>
+          <div className="container border">
+              <Outlet/>
+          </div>
+          <MainFooter/>
         </div>
-
-        <MainFooter/>
     </>
   )
 }

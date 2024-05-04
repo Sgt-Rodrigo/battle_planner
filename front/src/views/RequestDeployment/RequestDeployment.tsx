@@ -40,11 +40,12 @@ function RequestDeployment() {
         {({ isSubmitting }) => (
           <Form className='d-flex flex-column align-items-center'>
              <label htmlFor="date">Date</label>
-            <Field type="text" name="date" placeholder='yy/mm/dd'/>
+            <Field type="text" name="date" placeholder='dd/mm/yyyy'/>
             <ErrorMessage name="date" component="div" />
 
             <label htmlFor="time">Time</label>
             <Field as="select" name="time">
+            <option value="Time">Time</option>
                 {Array.from({ length: 12 }, (_, i) => i + 9).map((hour) => (
                     <option key={hour} value={`${hour}:00`}>{`${hour}:00`}</option>
                 ))}
@@ -53,7 +54,7 @@ function RequestDeployment() {
 
             <label htmlFor="location">Location</label>
             <Field as="select" name="location">
-                
+                <option value="Location">Location</option>
                 <option value="Ambush Activities (Southampton, UK)">Ambush Activities (Southampton, UK)</option>
                 <option value="Absolute Airsoft (Reading, UK)">Absolute Airsoft (Reading, UK)</option>
                 <option value="Ground Zero Airsoft (Ringwood, UK)">Ground Zero Airsoft (Ringwood, UK)</option>
@@ -65,7 +66,8 @@ function RequestDeployment() {
             <ErrorMessage name="location" component="div" />
           
             <label htmlFor="game-mode">Game Mode</label>
-            <Field as="select" name="game-mode" >
+            <Field as="select" name="gameMode" >
+                <option value="Select Mode">Game Mode</option>
                 <option value="CTF">CTF</option>
                 <option value="CQB indoor">CQB indoor</option>
                 <option value="CQB outdoor">CQB outdoor</option>
@@ -76,7 +78,7 @@ function RequestDeployment() {
                 <option value="Hide & Seek">Hide & Seek</option>
                 <option value="Juggernaut">Juggernaut</option>
             </Field>
-            <ErrorMessage name="game-mode" component="div" />        
+            <ErrorMessage name="game-mode" component="div"/>        
 
             <button className="mt-3 btn btn-warning" type="submit" disabled={isSubmitting}>
               Submit
