@@ -6,7 +6,7 @@ import  './MainFooter.module.scss';
 
 function MainFooter() {
   return (
-    <footer className="bg-dark py-3" data-bs-theme="dark">
+    <footer className="bg-dark py-3 h5" data-bs-theme="dark">
       <Container>
         <Row>
           <Col className="text-center py-2">

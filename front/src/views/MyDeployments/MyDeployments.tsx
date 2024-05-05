@@ -25,41 +25,52 @@ function MyDeployments(){
         {
             !userDeployments.length ? 
             <>
-             <h2 className="text-center">Everything quiet in the frontlines <br />
-                No deployments ahead. 
-            </h2>
-           <Link className="text-center text-decoration-none " to='/user/new_deployment'>
-            <h3 className="btn btn-lg btn-outline-warning  px-5 py-1 ">Request Deployment</h3>
-            </Link>
+            <div className={`${styles.no_deployments} container d-flex justify-content-end align-items-center border`}>
+                 <h2 className="text-center roboto-mono-p">Everything quiet in the frontlines <br />
+                    No deployments ahead. 
+                </h2>
+            </div>
+               <Link className="text-center text-decoration-none " to='/user/new_deployment'>
+                <h3 className="btn btn-lg btn-outline-warning  px-5 py-1 my-3 ">Request Deployment</h3>
+                </Link>
             
             </>
             : 
-                <Table striped bordered hover variant="dark" responsive>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Deployment Time</th>
-                            <th>Location</th>
-                            <th>Game Mode</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {userDeployments.map((deployment:userDeployment) => (
-                            <SingleDeployment
-                                key={deployment.id}
-                                id={deployment.id}
-                                date={deployment.date}
-                                time={deployment.time}
-                                location={deployment.location}
-                                gameMode={deployment.gameMode}
-                                status={deployment.status}
-                               
-                            />
-                        ))}
-                    </tbody>
-                </Table>         
+                <div className="container d-fex flex-column">
+                    <Table striped bordered hover variant="dark" responsive>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Deployment Time</th>
+                                <th>Location</th>
+                                <th>Game Mode</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {userDeployments.map((deployment:userDeployment) => (
+                                <SingleDeployment
+                                    key={deployment.id}
+                                    id={deployment.id}
+                                    date={deployment.date}
+                                    time={deployment.time}
+                                    location={deployment.location}
+                                    gameMode={deployment.gameMode}
+                                    status={deployment.status}
+                    
+                                />
+                            ))}
+                        </tbody>
+                    </Table>
+                    <div className='d-flex justify-content-end'>
+                        <Link className="text-center text-decoration-none" to='/user/new_deployment'>
+                            <h3 className="btn btn-lg btn-outline-warning px-5 py-1">
+                                Request Deployment
+                            </h3>
+                        </Link>
+                    </div>
+                </div>         
 
         }
     

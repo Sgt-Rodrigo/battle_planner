@@ -3,7 +3,7 @@ import { validateRegisterForm } from '../../helpers/validateRegisterForm';
 import axios from 'axios';
 import FormValues from '../../typings/interfaces/FormValues';
 import { Link, useNavigate } from 'react-router-dom';
-import { PiEye } from "react-icons/pi";
+import { PiEye, PiEyeSlash } from "react-icons/pi";
 import { PiEyeSlashLight } from "react-icons/pi";
 import { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -44,45 +44,65 @@ function Register() {
 
   return (
     <div className='container'>
-      <h1>Register</h1>
+      <h1 className='black-ops-one-regular text-center'>Register</h1>
       <Formik
         initialValues={{ usrName: '', email: '', birthDate: '', nationalId:'', password: '', confirm:'' }}
         validate={validateRegisterForm}
         onSubmit={registerUser}
       >
         {({ isSubmitting }) => (
-          <Form className='d-flex flex-column align-items-center border'>
+          <Form className='d-flex flex-column align-items-center border roboto-mono-p'>
              <label htmlFor="usrName">User Name</label>
             <Field type="text" name="usrName" />
-            <ErrorMessage className='' name="usrName" component="div" />
+            <ErrorMessage className='text-danger' name="usrName" component="div" />
 
             <label htmlFor="email">Email</label>
             <Field type="email" name="email" />
-            <ErrorMessage name="email" component="div" />
+            <ErrorMessage className='text-danger'  name="email" component="div" />
 
             <label htmlFor="birthDate">Birth Date</label>
             <Field type="text" name="birthDate" />
-            <ErrorMessage name="birthDate" component="div" />
+            <ErrorMessage className='text-danger' name="birthDate" component="div" />
           
             <label htmlFor="nationalId">National ID</label>
             <Field type="text" name="nationalId" />
-            <ErrorMessage name="nationalId" component="div" />
+            <ErrorMessage className='text-danger' name="nationalId" component="div" />
 
             <label htmlFor="password">Password</label>          
               <Field type={showPassword ? "text" : "password"} name="password" />
-                <PiEye onClick={togglePasswordVisibility} />
-              <ErrorMessage name="password" component="div" />
+              {
+              showPassword ? 
+              <PiEyeSlash onClick={togglePasswordVisibility} /> :
+              <PiEye onClick={togglePasswordVisibility} />
+            }
+              <ErrorMessage className='text-danger' name="password" component="div" />
           
 
             <label htmlFor="confirm">Confirm Password</label>
-            <Field type={showConfirm ? "text" : "password"} name="confirm" />
-            <PiEye onClick={toggleConfirmVisibility} />
-           <ErrorMessage name="confirm" component="div" />
+            <Field 
+            type={showConfirm ? "text" : "password"} 
+            name="confirm" 
+            onCopy={(e: React.ClipboardEvent) => e.preventDefault()}
+            onPaste={(e: React.ClipboardEvent) => e.preventDefault()}
+            onContextMenu={(e: React.MouseEvent) => e.preventDefault()}
+            />
+            {
+              showConfirm ? 
+              <PiEyeSlash onClick={toggleConfirmVisibility} /> :
+              <PiEye onClick={toggleConfirmVisibility} />
+            }
+           <ErrorMessage className='text-danger' name="confirm" component="div" />
       
 
-            <button className='my-3 bg-warning' type="submit" disabled={isSubmitting}>
+            <button className='btn btn-lg btn-outline-warning  my-3' type="submit" disabled={isSubmitting}>
               Submit
             </button>
+
+            <div className="login h5">
+              <p>Already a member?
+                <Link to='/user/login' className='text-decoration-none text-warning'> Login here</Link>
+                </p>
+            </div>
           </Form>
         )}
       </Formik>

@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function MainLayout() {
   return (
     <>
-        <div className={styles.layout_container}>
+        <div className={`${styles.layout_container} roboto-mono-p`}>
           <MainNavbar/>
           {/* do not wrapp or style the 'outlet' here cause you will restrict all views to specific styles like margins for instance, but your hero dont have margins, it should expand all the way        */}
               <Outlet/>

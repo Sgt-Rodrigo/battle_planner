@@ -5,7 +5,7 @@ import { LoginValues } from '../../typings/interfaces/FormValues';
 import {  useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../redux/state/store';
 import { loginUserSuccess } from '../../redux/slices/userSlice';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Bounce, toast } from 'react-toastify';
 
 
@@ -60,7 +60,7 @@ function Login() {
 
   return (
     <div className='container'>
-    <h1>Login</h1>
+    <h1 className='text-center black-ops-one-regular'>Login</h1>
     <Formik
       initialValues={{ usrName: '', password: '' }}
       validate={validateLoginForm}
@@ -70,15 +70,21 @@ function Login() {
         <Form className='d-flex flex-column align-items-center'>
            <label htmlFor="usrName">User Name</label>
           <Field type="text" name="usrName" />
-          <ErrorMessage name="usrName" component="div" />
+          <ErrorMessage className='text-danger' name="usrName" component="div" />
 
           <label htmlFor="password">Password</label>
           <Field type="password" name="password" />
-          <ErrorMessage name="password" component="div" />
+          <ErrorMessage className='text-danger' name="password" component="div" />
 
-          <button type="submit" disabled={isSubmitting}>
+          <button className='btn btn-lg btn-outline-warning my-3' type="submit" disabled={isSubmitting}>
             Submit
           </button>
+
+          <div className="login h5">
+              <p>Still not a member?
+                <Link to='/user/register' className='text-decoration-none text-warning'> Enlist here</Link>
+                </p>
+            </div>
         </Form>
       )}
     </Formik>
