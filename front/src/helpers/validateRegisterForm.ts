@@ -1,6 +1,8 @@
 import { FormikErrors } from 'formik';
 import FormValues from '../typings/interfaces/FormValues';
 
+
+
 export const validateRegisterForm = (values: FormValues) => {
   const errors: FormikErrors<FormValues> = {};
 
@@ -48,8 +50,8 @@ if (!values.birthDate) {
   //w National Id validation
   if (!values.nationalId) {
     errors.nationalId = 'National ID is required';
-  } else if (!/^\d+$/.test(values.nationalId)) {
-    errors.nationalId = 'National ID must contain only numbers';
+  } else if (!/^\d{1,7}$/.test(values.nationalId)) {
+    errors.nationalId = 'National ID must be a number with a maximum of 7 digits';
   }
 
   //w Password validation

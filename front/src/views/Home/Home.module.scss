@@ -16,21 +16,45 @@
     font-size: 6rem;
 }
 
+
+// words animation
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.word1, .word2, .word3 {
+  animation: slideInFromLeft 1s forwards;
+}
+
 .word1 {
     display: block;
     text-align: left;
+    opacity: 0;
+    animation-delay: 0;
   }
   
   .word2 {
     display: block;
     text-align: center;
     margin-top: 20px; /* adjust as needed */
+    opacity: 0;
+    animation-delay:0.5s
   }
   
   .word3 {
     display: block;
     text-align: right;
     margin-top: 40px; /* adjust as needed */
+    opacity: 0;
+    animation-delay: 1s;
+
   }
 
   .connect__link {

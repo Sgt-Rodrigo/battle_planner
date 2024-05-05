@@ -36,7 +36,7 @@ function Register() {
       return navigate('/user/login');
     } catch (error) {
       console.error('Registration error:', error);
-      alert('Registration failed');
+      alert(`Registration error: ${values.usrName} already exists`);
     } finally {
       setSubmitting(false);
     } 
