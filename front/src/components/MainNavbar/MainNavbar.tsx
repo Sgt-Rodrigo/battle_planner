@@ -1,17 +1,23 @@
-import { Image, NavLink } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { RootState } from '../../redux/state/store';
+import { AppDispatch, RootState } from '../../redux/state/store';
 import ChevronSergeant from '../../assets/images/ChevronSergeant.png';
 import styles from './MainNavbar.module.scss';
+import { logout } from '../../redux/slices/userSlice';
 
 function MainNavbar() {
 
   const userData = useSelector((state:RootState)=>state.user)
+  const dispatch = useDispatch<AppDispatch>();
+
+  function handleLogout(){
+    if(window.confirm('You are going AWOL!! Are you sure?')){
+      dispatch(logout());
+    }
+  }
 
   return (
     <>
@@ -56,7 +62,7 @@ function MainNavbar() {
               }
               {
                 userData.login &&
-                <Nav.Link as={Link} to="/">LogOut</Nav.Link>
+                <Nav.Link as={Link} to="/" onClick={handleLogout}>LogOut</Nav.Link>
               }
             </Nav>
           </Navbar.Collapse>

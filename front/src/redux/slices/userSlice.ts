@@ -65,6 +65,18 @@ const userSlice = createSlice({
             state.login = true;
             state.user= action.payload;
           },
+          logout(state) {
+            //w Resets the state
+              state.login = false;
+              state.user = {
+                id: 0,
+                name: '',
+                email: '',
+                birthDate: '',
+                nDni: 0,
+                appointments: []
+              };
+          }
         },
         extraReducers: (builder) => {
             builder
@@ -144,5 +156,5 @@ export const scheduleDeployment = createAsyncThunk(
     }
 )
 
-export const  { loginUserSuccess } = userSlice.actions;
+export const  { loginUserSuccess, logout } = userSlice.actions;
 export default userSlice.reducer;
