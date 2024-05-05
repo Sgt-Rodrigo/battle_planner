@@ -17,7 +17,7 @@ function SingleDeployment({id,date, time, location, gameMode, status}:SingleDepl
           <td>{time}</td>
           <td>{location}</td>
           <td>{gameMode}</td>
-          <td>{status}</td>
+          <td className={status === 'active'? 'text-success' : 'text-secondary'}>{status}</td>
           {
             deployment[0].status === 'cancelled' ? 
             <td>

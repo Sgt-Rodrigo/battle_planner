@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../redux/state/store"
 import { useNavigate } from "react-router-dom"
 import { NewDeploymentInput } from "../../typings/types/NewDeployment"
+import { Bounce, toast } from "react-toastify"
 
 
 function RequestDeployment() {
@@ -24,6 +25,17 @@ function RequestDeployment() {
         {setSubmitting}:{setSubmitting:(isSubmitting:boolean)=> void}) {  
            dispatch(scheduleDeployment(values)).then(() => {
                 setSubmitting(false);
+                toast('New Deployment Added',{
+                  position: "top-right",
+                  autoClose: 2000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                  transition: Bounce,
+                  })
                 navigate('/user/deployments');   
     })
         }
@@ -31,7 +43,7 @@ function RequestDeployment() {
   return (
     <>
      <div className='container'>
-      <h1>Request Deployment</h1>
+      <h1 className='text-center black-ops-one-regular'>Request Deployment</h1>
       <Formik
         initialValues={initialValues}
         validate={validateDeploymentForm}
@@ -41,7 +53,7 @@ function RequestDeployment() {
           <Form className='d-flex flex-column align-items-center'>
              <label htmlFor="date">Date</label>
             <Field type="text" name="date" placeholder='dd-mm-yyyy'/>
-            <ErrorMessage name="date" component="div" />
+            <ErrorMessage className='text-danger' name="date" component="div" />
 
             <label htmlFor="time">Time</label>
             <Field as="select" name="time">
@@ -50,7 +62,7 @@ function RequestDeployment() {
                     <option key={hour} value={`${hour}:00`}>{`${hour}:00`}</option>
                 ))}
             </Field>
-            <ErrorMessage name="time" component="div" />
+            <ErrorMessage className='text-danger' name="time" component="div" />
 
             <label htmlFor="location">Location</label>
             <Field as="select" name="location">
@@ -63,7 +75,7 @@ function RequestDeployment() {
                 <option value="Center Mass Airsoft (Kansas, US)">Center Mass Airsoft (Kansas, US)</option>
                 <option value="Airsoft Depot (Georgia, US)">Airsoft Depot (Georgia, US)</option>
             </Field>
-            <ErrorMessage name="location" component="div" />
+            <ErrorMessage className='text-danger' name="location" component="div" />
           
             <label htmlFor="game-mode">Game Mode</label>
             <Field as="select" name="gameMode" >
@@ -78,7 +90,7 @@ function RequestDeployment() {
                 <option value="Hide & Seek">Hide & Seek</option>
                 <option value="Juggernaut">Juggernaut</option>
             </Field>
-            <ErrorMessage name="game-mode" component="div"/>        
+            <ErrorMessage className='text-danger' name="gameMode" component="div"/>        
 
             <button className="mt-3 btn btn-warning" type="submit" disabled={isSubmitting}>
               Submit

@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { PiEye, PiEyeSlash } from "react-icons/pi";
 import { PiEyeSlashLight } from "react-icons/pi";
 import { useState } from 'react';
-import { toast } from 'react-toastify';
+import { Bounce, toast } from 'react-toastify';
 
 function Register() {
   //w show/hide password
@@ -25,14 +25,24 @@ function Register() {
   async function registerUser(values:FormValues, {setSubmitting}:{ setSubmitting: (isSubmitting: boolean) => void } ){
     try {
       const response = await axios.post('http://localhost:3001/users/user/register', {
-        usrName: values.usrName,
-        email: values.email,
-        birthDate: values.birthDate,
-        nationalId: values.nationalId,
-        password: values.password
+        usrName: values.usrName.trim(),
+        email: values.email.trim(),
+        birthDate: values.birthDate.trim(),
+        nationalId: values.nationalId.trim(),
+        password: values.password.trim()
       });
       console.log(response.data);
-      toast.info('Welcome to our barracks')
+      toast.info(`Welcome to our barracks. Login to continue`,  {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+        })
       return navigate('/user/login');
     } catch (error) {
       console.error('Registration error:', error);
@@ -53,19 +63,19 @@ function Register() {
         {({ isSubmitting }) => (
           <Form className='d-flex flex-column align-items-center border roboto-mono-p'>
              <label htmlFor="usrName">User Name</label>
-            <Field type="text" name="usrName" />
+            <Field type="text" name="usrName" placeholder='Pvt.Ryan' />
             <ErrorMessage className='text-danger' name="usrName" component="div" />
 
             <label htmlFor="email">Email</label>
-            <Field type="email" name="email" />
+            <Field type="email" name="email" placeholder='ryan@earnit.com'/>
             <ErrorMessage className='text-danger'  name="email" component="div" />
 
             <label htmlFor="birthDate">Birth Date</label>
-            <Field type="text" name="birthDate" />
+            <Field type="text" name="birthDate" placeholder='06-06-1944'/>
             <ErrorMessage className='text-danger' name="birthDate" component="div" />
           
             <label htmlFor="nationalId">National ID</label>
-            <Field type="text" name="nationalId" />
+            <Field type="text" name="nationalId" placeholder='2233322'/>
             <ErrorMessage className='text-danger' name="nationalId" component="div" />
 
             <label htmlFor="password">Password</label>          

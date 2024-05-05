@@ -18,7 +18,7 @@ function MyDeployments(){
     <>
         {
             userDeployments.length > 0 &&  
-            <h1 className="text-center">Upcoming Deployments</h1>
+            <h1 className="text-center black-ops-one-regular">Upcoming Deployments</h1>
         }
        
 

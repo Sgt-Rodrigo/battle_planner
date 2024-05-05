@@ -43,6 +43,8 @@ if (!values.birthDate) {
 
     if (currentYear - year < 16 || (currentYear - year === 16 && (month > currentMonth || (month === currentMonth && day > currentDay)))) {
       errors.birthDate = 'You must be at least 16 years old';
+    } else if (year < currentYear - 120 || year > currentYear) {
+      errors.birthDate = 'Quit trolling. Enter a year between ' + (currentYear - 120) + ' and ' + currentYear;
     }
   }
 }
