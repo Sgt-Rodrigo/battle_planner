@@ -40,7 +40,7 @@ function RequestDeployment() {
         {({ isSubmitting }) => (
           <Form className='d-flex flex-column align-items-center'>
              <label htmlFor="date">Date</label>
-            <Field type="text" name="date" placeholder='dd/mm/yyyy'/>
+            <Field type="text" name="date" placeholder='dd-mm-yyyy'/>
             <ErrorMessage name="date" component="div" />
 
             <label htmlFor="time">Time</label>

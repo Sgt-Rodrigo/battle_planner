@@ -1,11 +1,7 @@
 //W global styles + bootstrap import
+//w here you can also import your partials and skip @forward
 @import './bootstrap/scss/bootstrap';
+@import './styles/base/typography';
 
-// body {
-//     display: flex;
-//     flex-direction: column;
-//     min-height: 100vh;
-//     background-color: #303030;
-//     color: #ffff;
-//     font-size: 1.5rem;
-// }
+
+

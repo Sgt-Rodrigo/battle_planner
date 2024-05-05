@@ -1,0 +1,38 @@
+.hero {
+    min-height: 100vh;
+    background-image: url('../../assets/hero/hero-wide1.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0% 30%;
+    // background-color: rgb(145, 127, 65);
+    // background-blend-mode: luminosity;
+}
+
+.hero__text {
+    background: linear-gradient(to right, transparent, rgb(73, 41, 2))
+}
+
+.hero__text h2 span {
+    font-size: 6rem;
+}
+
+.word1 {
+    display: block;
+    text-align: left;
+  }
+  
+  .word2 {
+    display: block;
+    text-align: center;
+    margin-top: 20px; /* adjust as needed */
+  }
+  
+  .word3 {
+    display: block;
+    text-align: right;
+    margin-top: 40px; /* adjust as needed */
+  }
+
+  .connect__link {
+    color: rgb(255, 154, 1)
+  }

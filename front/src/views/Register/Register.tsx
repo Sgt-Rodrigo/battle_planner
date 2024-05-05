@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { PiEye } from "react-icons/pi";
 import { PiEyeSlashLight } from "react-icons/pi";
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 function Register() {
   //w show/hide password
@@ -31,8 +32,8 @@ function Register() {
         password: values.password
       });
       console.log(response.data);
-      alert('Registration successful');
-      navigate('/');
+      toast.info('Welcome to our barracks')
+      return navigate('/user/login');
     } catch (error) {
       console.error('Registration error:', error);
       alert('Registration failed');

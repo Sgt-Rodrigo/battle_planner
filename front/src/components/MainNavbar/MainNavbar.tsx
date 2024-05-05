@@ -18,14 +18,16 @@ function MainNavbar() {
       <Navbar sticky="top" bg="dark" data-bs-theme="dark" expand="lg" className="bg-body-tertiary">
         <Container>
           <Navbar.Brand>
-          <img src={ChevronSergeant} alt="chevron icon" style={{ width: '30px', height: '30px' }}/>
+          <img src={ChevronSergeant} alt="chevron icon" 
+          style={{ width: '30px', height: '30px' }}
+          />
           </Navbar.Brand>
-          <Navbar.Brand as={Link} to="/">
-            Battle Bookings
+          <Navbar.Brand>
+            BattlePlanner
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto gap-4">
+            <Nav className="me-auto gap-4 black-ops-one-regular">
               <Nav.Link as={Link} to="/">Home</Nav.Link>
               {/* if user is logged in, the following link is rendered */}
               {userData.login && 

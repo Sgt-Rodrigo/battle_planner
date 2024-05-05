@@ -1,32 +1,39 @@
-import { useEffect, useState } from "react";
-import { mockAppointments } from "../../helpers/mock-appointments";
 import SingleDeployment from "../../components/SingleDeployment/SingleDeployment";
 import Table from 'react-bootstrap/Table';
-import axios from 'axios';
 import { useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/state/store";
+import { RootState } from "../../redux/state/store";
 import { userDeployment } from "../../typings/types/userDeployment";
+import { Link } from "react-router-dom";
+import styles from './MyDeployments.module.scss';
 
 
 function MyDeployments(){
   const userData = useSelector((state:RootState)=>state.user);
   const userDeployments = userData.user.appointments;
   console.log('Hi Mate',userData);
-  console.log('userDeployments', userDeployments);
-  // const [loading, setLoading] = useState(false);
-
- 
+  console.log('userDeployments', userDeployments); 
 
 
   return (
     <>
-        <h1>My Deployments</h1>
+        {
+            userDeployments.length > 0 &&  
+            <h1 className="text-center">Upcoming Deployments</h1>
+        }
+       
 
         {
             !userDeployments.length ? 
-            <div>Everything quiet in the frontlines <br /> 
+            <>
+             <h2 className="text-center">Everything quiet in the frontlines <br />
                 No deployments ahead. 
-            </div> : 
+            </h2>
+           <Link className="text-center text-decoration-none " to='/user/new_deployment'>
+            <h3 className="btn btn-lg btn-outline-warning  px-5 py-1 ">Request Deployment</h3>
+            </Link>
+            
+            </>
+            : 
                 <Table striped bordered hover variant="dark" responsive>
                     <thead>
                         <tr>

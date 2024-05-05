@@ -6,16 +6,11 @@ import  './MainFooter.module.scss';
 
 function MainFooter() {
   return (
-    <footer className="bg-dark mt-5" data-bs-theme="dark">
+    <footer className="bg-dark py-3" data-bs-theme="dark">
       <Container>
         <Row>
           <Col className="text-center py-2">
-            <h5>Battle Bookings</h5>
-          </Col>
-        </Row>
-        <Row>
-          <Col className="text-center py-2">
-            <Nav className="justify-content-center">
+            <Nav className="footer__nav justify-content-center">
               <Nav.Item>
                 <Nav.Link as={Link} to="/"><span>Home</span></Nav.Link>
               </Nav.Item>
@@ -38,7 +33,9 @@ function MainFooter() {
                 <Nav.Link className='text-danger' as={Link} to="/contact"><span>Contact Us</span></Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link as={Link} to="/privacy"><span>Privacy Policy</span></Nav.Link>
+                <Nav.Link  as={Link} to="/privacy">
+                  <span className='text-primary'>Privacy Policy</span>
+                  </Nav.Link>
               </Nav.Item>
             </Nav>
           </Col>

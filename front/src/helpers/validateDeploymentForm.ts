@@ -4,7 +4,7 @@ import { DeploymentFormValues } from '../typings/types/DeploymentFormValues';
 export const validateDeploymentForm = (values: DeploymentFormValues) => {
     const errors: FormikErrors<DeploymentFormValues> = {};
   
- //w Date validation
+//w Date validation
 if (!values.date) {
   errors.date = 'Required';
 } else {
@@ -21,8 +21,14 @@ if (!values.date) {
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Set hours to start of day for comparison
 
+    // Check if selectedDate is in the past
     if (selectedDate <= today) {
       errors.date = 'Date must be in the future';
+    }
+
+    // Check if selectedDate is a weekend (Saturday or Sunday)
+    if (selectedDate.getDay() === 0 || selectedDate.getDay() === 6) {
+      errors.date = 'Events are only available on weekdays (Monday to Friday)';
     }
   }
 }

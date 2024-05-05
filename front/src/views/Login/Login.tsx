@@ -6,6 +6,7 @@ import {  useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../redux/state/store';
 import { loginUserSuccess } from '../../redux/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
+import { Bounce, toast } from 'react-toastify';
 
 
 
@@ -17,7 +18,7 @@ function Login() {
 
 
   //w onSubmit function
-  async function loginUser(values:LoginValues,{setSubmitting}:{setSubmitting:(isSubmitting:boolean)=> void}){
+ async function loginUser(values:LoginValues,{setSubmitting}:{setSubmitting:(isSubmitting:boolean)=> void}){
     try {
       const uri = 'http://localhost:3001/users/login';
 
@@ -34,8 +35,18 @@ function Login() {
       console.log(userData.user.email);
       console.log(userData.user.appointments)
 
-      alert('Login successful')
-      navigate('/user/deployments');
+      toast.success(`Gear up ${userData.user.name}!!!!`,{
+        position: "top-right",
+        autoClose: 2500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce
+        })
+      return navigate('/user/deployments');
      
     } catch (error) {
       if(error instanceof Error){
