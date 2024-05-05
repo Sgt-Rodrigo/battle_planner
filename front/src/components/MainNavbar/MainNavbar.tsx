@@ -14,7 +14,7 @@ function MainNavbar() {
   const dispatch = useDispatch<AppDispatch>();
 
   function handleLogout(){
-    if(window.confirm('You are going AWOL!! Are you sure?')){
+    if(window.confirm('YOU ARE GOING AWOL! >>> ARE YOU SURE?')){
       dispatch(logout());
     }
   }
