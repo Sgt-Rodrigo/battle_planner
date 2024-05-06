@@ -38,7 +38,7 @@ function MainNavbar() {
               {/* if user is logged in, the following link is rendered */}
               {userData.login && 
               <Nav.Link as={Link} to="/user/deployments">
-                My Deployments
+                My-Deployments
                 </Nav.Link>}
               {
                 userData.login && 
