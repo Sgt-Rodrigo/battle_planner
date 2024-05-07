@@ -26,7 +26,7 @@ function Register() {
     try {
       const response = await axios.post('http://localhost:3001/users/user/register', {
         usrName: values.usrName.trim(),
-        email: values.email.trim(),
+        email: values.email.trim().toLowerCase(),
         birthDate: values.birthDate.trim(),
         nationalId: values.nationalId.trim(),
         password: values.password.trim()

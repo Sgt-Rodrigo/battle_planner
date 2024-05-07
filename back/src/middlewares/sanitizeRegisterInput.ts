@@ -5,13 +5,13 @@ export default function sanitizeUserInput(req: Request, res: Response, next: Nex
     const errors: any = {};
 
     //  //w validates username
-    //  if (!usrName) {
-    //     errors.usrName = 'Username is required';
-    // } else if (usrName.length < 3 || usrName.length > 20) {
-    //     errors.usrName = 'Username must be between 3 and 20 characters';
-    // } else if (!/^[a-zA-Z0-9_]+$/.test(usrName)) {
-    //     errors.usrName = 'Only letters, numbers, and underscores, spaces are not allowed';
-    // }
+     if (!usrName) {
+        errors.usrName = 'Username is required';
+    } else if (usrName.length < 3 || usrName.length > 20) {
+        errors.usrName = 'Username must be between 3 and 20 characters';
+    } else if (!/^[a-zA-Z0-9_]+$/.test(usrName)) {
+        errors.usrName = 'Only letters, numbers, and underscores, spaces are not allowed';
+    }
 
     //w Email validation
   if (!email) {
@@ -48,16 +48,16 @@ export default function sanitizeUserInput(req: Request, res: Response, next: Nex
 //w National ID validation
 if (!nationalId) {
     errors.nationalId = 'National ID is required';
-} else if (!/^\d{1,7}$/.test(nationalId)) {
-    errors.nationalId = 'National ID must be a number with a maximum of 7 digits';
+} else if (!/^\d{1,8}$/.test(nationalId)) {
+    errors.nationalId = 'National ID must be a number with a maximum of 8 digits';
 }
 
-// //w Password validation
-// if (!password) {
-//     errors.password = 'Password is required';
-// } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/.test(password)) {
-//     errors.password = 'Password must be 8 to 20 characters long and contain at least one symbol, one uppercase letter, and one alphanumeric character.';
-// }
+//w Password validation
+if (!password) {
+    errors.password = 'Password is required';
+} else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/.test(password)) {
+    errors.password = 'Password must be 8 to 20 characters long and contain at least one symbol, one uppercase letter, and one alphanumeric character.';
+}
 
 
     //w checks if there are any validation errors

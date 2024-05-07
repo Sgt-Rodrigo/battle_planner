@@ -29,6 +29,7 @@
 ## Back-end
 -for 'usersRouter.get('/', auth, getUsers)' > remember you need a token with value 'authenticated' (unquoted).
 -implements Json-server for mock database (check script in package.json)
+-extra-credict > sets up basic mailer using nodemailer (NON-FUNCTIONAL, still on the works) > 'less secure apps' option is obsolete since september 2023.
 
 
 ## Front-end
@@ -72,6 +73,7 @@ I decided to use TS in the front-end also to keep consistency and practice.
 ## Back-end
 -para 'usersRouter.get('/', auth, getUsers)' > se requiere enviar token con valor 'authenticated' (sin comillas)
 -implementa Json-server para base de datos provisoria.
+-extra-credit: el mailer esta seteado pero no funciona aun, requiere otros metodos de autenticacion desde que google dejó obsoleta la opcion 'less secure apps'
 
 
 ## Front-end

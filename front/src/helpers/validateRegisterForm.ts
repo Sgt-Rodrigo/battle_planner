@@ -52,8 +52,8 @@ if (!values.birthDate) {
   //w National Id validation
   if (!values.nationalId) {
     errors.nationalId = 'National ID is required';
-  } else if (!/^\d{1,7}$/.test(values.nationalId)) {
-    errors.nationalId = 'National ID must be a number with a maximum of 7 digits';
+  } else if (!/^\d{1,8}$/.test(values.nationalId)) {
+    errors.nationalId = 'National ID must be a number with a maximum of 8 digits';
   }
 
   //w Password validation
