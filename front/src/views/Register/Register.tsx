@@ -31,7 +31,7 @@ function Register() {
         nationalId: values.nationalId.trim(),
         password: values.password.trim()
       });
-      console.log(response.data);
+
       toast.info(`Welcome to our barracks. Login to continue`,  {
         position: "top-right",
         autoClose: 3000,

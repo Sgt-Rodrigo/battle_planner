@@ -1,15 +1,16 @@
 import { Router } from "express";
 import { createUser, getUsers, deleteUser, getUserByID, loginUser } from "../controllers/UsersController";
 import auth from "../middlewares/auth";
-import sanitizeUserInput from "../middlewares/sanitizeUserInput";
+import sanitizeRegisterInput from "../middlewares/sanitizeRegisterInput";
+import sanitizeLoginInput from "../middlewares/sanitizeLoginInput";
 
 const usersRouter:Router = Router();
 
 usersRouter.get('/', auth, getUsers);
 
-usersRouter.post('/user/register', sanitizeUserInput, createUser);
+usersRouter.post('/user/register', sanitizeRegisterInput, createUser);
 
-usersRouter.post('/login', sanitizeUserInput, loginUser);
+usersRouter.post('/login', sanitizeLoginInput, loginUser);
 
 usersRouter.delete('/', deleteUser);
 

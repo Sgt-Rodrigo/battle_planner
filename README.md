@@ -26,6 +26,12 @@
 
 #### Proyect clarifications ####
 
+## Back-end
+-for 'usersRouter.get('/', auth, getUsers)' > remember you need a token with value 'authenticated' (unquoted).
+-implements Json-server for mock database (check script in package.json)
+
+
+## Front-end
 *** Proyect implements > 
 -Typescript with React and swc (rust compilation): although it wasn't demanded by the assignment
 I decided to use TS in the front-end also to keep consistency and practice.
@@ -63,6 +69,12 @@ I decided to use TS in the front-end also to keep consistency and practice.
 
 #### Aclaraciones del Proyecto ####
 
+## Back-end
+-para 'usersRouter.get('/', auth, getUsers)' > se requiere enviar token con valor 'authenticated' (sin comillas)
+-implementa Json-server para base de datos provisoria.
+
+
+## Front-end
 *** Implementaciones del Proyecto > 
 - Typescript con React y swc (compilación en rust): aunque no era requerido por la tarea, decidí usar TS en el front-end también para mantener consistencia y practicar.
 - Sass
